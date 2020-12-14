@@ -17,8 +17,7 @@ Using Node.js Open Source JavaScript Data Analysis
 
 (How To Scrape a Website Using Node.js and Puppeteer)[https://www.digitalocean.com/community/tutorials/how-to-scrape-a-website-using-node-js-and-puppeteer]
 
-By Gbadebo Bello
-gbahdeyboh
+By Gbadebo Bello at GitHub (gbahdeyboh)[https://github.com/Gbahdeyboh]
 
 Published onAugust 13, 2020 19.3kviews
 The author selected the Free and Open Source Fund to receive a donation as part of the Write for DOnations program.
