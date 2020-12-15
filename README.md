@@ -78,13 +78,28 @@ Type yes and press ENTER. npm will save this output as your package.json file.
 # Now use npm to install Puppeteer:
 
 npm install --save puppeteer
+
+# results:
+added 54 packages, and audited 54 packages in 57s
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 ```
 
 This command installs both Puppeteer and a version of Chromium that the Puppeteer team knows will work with their API.
 
 On Linux machines, Puppeteer might require some additional dependencies.
 
-If you are using Ubuntu 18.04, check the ‘Debian Dependencies’ dropdown inside the 'Chrome headless doesn’t launch on UNIX’ section of Puppeteer’s troubleshooting docs. You can use the following command to help find any missing dependencies:
+If you are using Ubuntu 18.04, check the ‘Debian Dependencies’ dropdown inside the 'Chrome headless doesn’t launch on UNIX’ section of Puppeteer’s troubleshooting docs. 
+
+Found this on (StackOverflow)[https://stackoverflow.com/questions/59112956/cant-use-puppeteer-error-failed-to-launch-chrome]
+```bash
+sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+```
+
+You can use the following command to help find any missing dependencies:
 
 ```bash
 ldd chrome | grep not
