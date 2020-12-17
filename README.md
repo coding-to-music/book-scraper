@@ -263,15 +263,15 @@ Save and close the file.
 
 Your program’s file-structure is now complete. The first level of your project’s directory tree will look like this:
 
-Output
-.
-├── browser.js
-├── index.js
-├── node_modules
-├── package-lock.json
-├── package.json
-├── pageController.js
-└── pageScraper.js
+Output  
+.  
+├── browser.js  
+├── index.js  
+├── node_modules  
+├── package-lock.json  
+├── package.json  
+├── pageController.js  
+└── pageScraper.js  
 Now run the command npm run start and watch your scraper application execute:
 
 ```bash
