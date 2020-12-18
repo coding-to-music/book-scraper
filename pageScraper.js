@@ -1,3 +1,4 @@
+
 # Here you will create an object literal with a url property and a scraper() method. 
 # The url is the web URL of the web page you want to scrape, 
 # while the scraper() method contains the code that will perform your actual scraping, 
