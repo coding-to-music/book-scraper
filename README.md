@@ -229,7 +229,6 @@ module.exports = (browserInstance) => scrapeAll(browserInstance)
 Save and close the file.
 ```
 
-
 ### Finally, create your last .js file, pageScraper.js:
 
 ```bash
