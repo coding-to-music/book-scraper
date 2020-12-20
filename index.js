@@ -1,6 +1,7 @@
-# Here you will require browser.js and pageController.js. You will then call the startBrowser() function and pass the created browser instance to our page controller, which will direct its actions. Add the following code:
+// ./book-scraper/index.js
 
-./book-scraper/index.js
+// # Here you will require browser.js and pageController.js. You will then call the startBrowser() function and pass the created browser instance to our page controller, which will direct its actions. Add the following code:
+
 const browserObject = require('./browser');
 const scraperController = require('./pageController');
 
