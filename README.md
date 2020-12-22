@@ -177,6 +177,7 @@ Notice that the .launch() method takes a JSON parameter with several values:
 - ignoreHTTPSErrors - true allows you to visit websites that aren’t hosted over a secure HTTPS protocol and ignore any HTTPS-related errors.
 Save and close the file.
 
+
 Now create your second .js file, index.js:
 
 ```bash
