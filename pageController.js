@@ -11,7 +11,10 @@ async function scrapeAll(browserInstance){
     try{
         browser = await browserInstance;
         await pageScraper.scraper(browser);
-
+        // Call the scraper for different set of books to be scraped
+        scrapedData['Travel'] = await pageScraper.scraper(browser, 'Travel');
+        await browser.close();
+        console.log(scrapedData)
     }
     catch(err){
         console.log("Could not resolve the browser instance => ", err);
