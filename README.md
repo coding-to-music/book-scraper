@@ -598,10 +598,9 @@ To scrape data by category, you will need to modify both your pageScraper.js fil
 Open pageController.js in a text editor:
 
 ```bash
-nano pageController.js
 # Call the scraper so that it only scrapes travel books. Add the following code:
 
-./book-scraper/pageController.js
+# ./book-scraper/pageController.js
 const pageScraper = require('./pageScraper');
 async function scrapeAll(browserInstance){
     let browser;

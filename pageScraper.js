@@ -1,30 +1,12 @@
-// ./book-scraper/pageScraper.js
-
-// # Here you will create an object literal with a url property and a scraper() method. 
-// # The url is the web URL of the web page you want to scrape, 
-// # while the scraper() method contains the code that will perform your actual scraping, 
-// # although at this stage it merely navigates to a URL. 
-// # Add the following code:
-
-// # Add the following highlighted content. You will nest another await block inside await page.goto(this.url);:
-
 const scraperObject = {
     url: 'http://books.toscrape.com',
-    async scraper(browser, category){
+    async scraper(browser){
+        let numPages = 0;
+        let numCount = 5;
         let page = await browser.newPage();
         console.log(`Navigating to ${this.url}...`);
         // Navigate to the selected page
         await page.goto(this.url);
-        // Select the category of book to be displayed
-        let selectedCategory = await page.$$eval('.side_categories > ul > li > ul > li > a', (links, _category) => {
-
-            // Search for the element that has the matching text
-            links = links.map(a => a.textContent.replace(/(\r\n\t|\n|\r|\t|^\s|\s$|\B\s|\s\B)/gm, "") === _category ? a : null);
-            let link = links.filter(tx => tx !== null)[0];
-            return link.href;
-        }, category);
-        // Navigate to the selected category
-        await page.goto(selectedCategory);
         let scrapedData = [];
         // Wait for the required DOM to be rendered
         async function scrapeCurrentPage(){
@@ -74,8 +56,11 @@ const scraperObject = {
             catch(err){
                 nextButtonExist = false;
             }
-            if(nextButtonExist){
-                await page.click('.next > a');
+
+            numPages++;
+
+            if((nextButtonExist) && (numPages < numCount)){
+                await page.click('.next > a');   
                 return scrapeCurrentPage(); // Call this function recursively
             }
             await page.close();
@@ -87,10 +72,4 @@ const scraperObject = {
     }
 }
 
-module.exports = scraperObject; 
-
-
-// # Puppeteer has a newPage() method that creates a new page instance in the browser, 
-// # and these page instances can do quite a few things. 
-// # In our scraper() method, you created a page instance and 
-// # then used the page.goto() method to navigate to the books.toscrape.com homepage.
+module.exports = scraperObject;
