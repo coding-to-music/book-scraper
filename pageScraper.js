@@ -19,6 +19,10 @@ const scraperObject = {
                 links = links.map(el => el.querySelector('h3 > a').href)
                 return links;
             });
+
+            // numPages++;
+
+            // if  (numPages < numCount) {
             // Loop through each of those links, open a new page instance and get the relevant data from them
             let pagePromise = (link) => new Promise(async(resolve, reject) => {
                 let dataObj = {};
@@ -39,8 +43,8 @@ const scraperObject = {
                 dataObj['upc'] = await newPage.$eval('.table.table-striped > tbody > tr > td', table => table.textContent);
                 resolve(dataObj);
                 await newPage.close();
-            });
-
+            });        
+        // };
             for(link in urls){
                 let currentPageData = await pagePromise(urls[link]);
                 scrapedData.push(currentPageData);
@@ -57,9 +61,7 @@ const scraperObject = {
                 nextButtonExist = false;
             }
 
-            numPages++;
-
-            if((nextButtonExist) && (numPages < numCount)){
+            if(nextButtonExist){
                 await page.click('.next > a');   
                 return scrapeCurrentPage(); // Call this function recursively
             }
