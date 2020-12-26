@@ -20,11 +20,11 @@ const scraperObject = {
                 return links;
             });
 
-            // numPages++;
 
             // if  (numPages < numCount) {
             // Loop through each of those links, open a new page instance and get the relevant data from them
             let pagePromise = (link) => new Promise(async(resolve, reject) => {
+                numPages++;
                 let dataObj = {};
                 let newPage = await browser.newPage();
                 await newPage.goto(link);
@@ -36,12 +36,17 @@ const scraperObject = {
                     // Get the number of stock available
                     let regexp = /^.*\((.*)\).*$/i;
                     let stockAvailable = regexp.exec(text)[1].split(' ')[0];
+                    console.log(stockAvailable);
                     return stockAvailable;
                 });
                 dataObj['imageUrl'] = await newPage.$eval('#product_gallery img', img => img.src);
                 dataObj['bookDescription'] = await newPage.$eval('#product_description', div => div.nextSibling.nextSibling.textContent);
                 dataObj['upc'] = await newPage.$eval('.table.table-striped > tbody > tr > td', table => table.textContent);
                 resolve(dataObj);
+
+                console.log(`Page ${numPages} of ${numCount}`);
+
+                // console.log(`dataObj is ${JSON.stringify(dataObj)}...`);
                 await newPage.close();
             });        
         // };

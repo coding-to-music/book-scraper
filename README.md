@@ -502,6 +502,8 @@ nano pagescraper.js
 # click the next button if it exists. Add the following highlighted code:
 
 ./book-scraper/pageScraper.js scraper()
+
+
 const scraperObject = {
     url: 'http://books.toscrape.com',
     async scraper(browser){
