@@ -1,16 +1,18 @@
 const scraperObject = {
     url: 'http://books.toscrape.com',
     async scraper(browser){
-        let numPages = 0;
-        let numCount = 5;
+        let numCount = 30;
+        let thisPage = 0;
+        let totalScraped = 0;
         let page = await browser.newPage();
-        console.log(`Navigating to ${this.url}...`);
+        console.log(`In pageScraper, Navigating to ${this.url}...`);
         // Navigate to the selected page
         await page.goto(this.url);
         let scrapedData = [];
         // Wait for the required DOM to be rendered
-        async function scrapeCurrentPage(){
+        async function scrapeCurrentPage(thisPage, totalScraped){
             await page.waitForSelector('.page_inner');
+            thisPage++;
             // Get the link to all the required books
             let urls = await page.$$eval('section ol > li', links => {
                 // Make sure the book to be scraped is in stock
@@ -20,11 +22,14 @@ const scraperObject = {
                 return links;
             });
 
-
+            let numUrls = 0;
             // if  (numPages < numCount) {
             // Loop through each of those links, open a new page instance and get the relevant data from them
             let pagePromise = (link) => new Promise(async(resolve, reject) => {
-                numPages++;
+                totalScraped++;
+                numUrls++;
+                if  (numUrls <= numCount) {
+
                 let dataObj = {};
                 let newPage = await browser.newPage();
                 await newPage.goto(link);
@@ -44,12 +49,12 @@ const scraperObject = {
                 dataObj['upc'] = await newPage.$eval('.table.table-striped > tbody > tr > td', table => table.textContent);
                 resolve(dataObj);
 
-                console.log(`Page ${numPages} of ${numCount}`);
+                console.log(`thisPage is ${thisPage} total previously ${totalScraped} and URL ${numUrls} of ${urls.length} Total Scraped is now ${totalScraped + numUrls}`);
 
                 // console.log(`dataObj is ${JSON.stringify(dataObj)}...`);
                 await newPage.close();
+                }
             });        
-        // };
             for(link in urls){
                 let currentPageData = await pagePromise(urls[link]);
                 scrapedData.push(currentPageData);
@@ -68,12 +73,15 @@ const scraperObject = {
 
             if(nextButtonExist){
                 await page.click('.next > a');   
-                return scrapeCurrentPage(); // Call this function recursively
+                let newTotalScraped  = totalScraped + numUrls;
+                return scrapeCurrentPage(thisPage, newTotalScraped); // Call this function recursively
             }
+        // };
+
             await page.close();
             return scrapedData;
         }
-        let data = await scrapeCurrentPage();
+        let data = await scrapeCurrentPage(thisPage, totalScraped);
         console.log(data);
         return data;
     }
