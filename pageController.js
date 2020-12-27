@@ -11,9 +11,9 @@
 // console.log(`URL ${numPage} of ${scrapedData.length}`);
 
 const pageScraper = require('./pageScraper');
-async function scrapeAll(browserInstance){
+async function scrapeAll(browserInstance) {
     let browser;
-    try{
+    try {
         browser = await browserInstance;
         let scrapedData = {};
 
@@ -25,12 +25,12 @@ async function scrapeAll(browserInstance){
         await browser.close();
         console.log(scrapedData)
     }
-    catch(err){
+    catch (err) {
         console.log("Could not resolve the browser instance => ", err);
     }
 }
 module.exports = (browserInstance) => scrapeAll(browserInstance)
- 
+
 // # This code exports a function that takes in the browser instance and passes it to a function called scrapeAll(). 
 // # This function, in turn, passes this instance to pageScraper.scraper() as an argument which uses it to scrape pages.
 

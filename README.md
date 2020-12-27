@@ -37,7 +37,7 @@ With Node.js installed, you can begin setting up your web scraper. First, you wi
 
 Create a folder for this project and then move inside:
 
-```bash
+```java
 mkdir book-scraper
 cd book-scraper
 ```
@@ -48,13 +48,13 @@ We need to install one package using npm, or the node package manager. First ini
 
 Initialize npm for your project:
 
-```bash
+```java
 npm init
 ```
  
 npm will present a sequence of prompts. You can press ENTER to every prompt, or you can add personalized descriptions. Make sure to press ENTER and leave the default values in place when prompted for entry point: and test command:. Alternately, you can pass the y flag to npm—npm init -y—and it will submit all the default values for you.
 
-```bash
+```java
 # Your output will look something like this:
 
 Output
@@ -95,13 +95,13 @@ On Linux machines, Puppeteer might require some additional dependencies.
 If you are using Ubuntu 18.04, check the ‘Debian Dependencies’ dropdown inside the 'Chrome headless doesn’t launch on UNIX’ section of Puppeteer’s troubleshooting docs. 
 
 Found this on (StackOverflow)[https://stackoverflow.com/questions/59112956/cant-use-puppeteer-error-failed-to-launch-chrome]
-```bash
+```java
 sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
 
 You can use the following command to help find any missing dependencies:
 
-```bash
+```java
 ldd chrome | grep not
 ```
  
@@ -109,7 +109,7 @@ With npm, Puppeteer, and any additional dependencies installed, your package.jso
 
 Open the file in your preferred text editor:
 
-```bash
+```java
 nano package.json
  
 # Find the scripts: section and add the following configurations. Remember to place a comma at the end of the test script line, or your file will not parse correctly.
@@ -139,7 +139,7 @@ Your web scraper will require four .js files: browser.js, index,js, pageControll
 
 From your project’s root directory, create and open browser.js in a text editor:
 
-```bash
+```java
 nano browser.js
  
 # First, you will require Puppeteer and then create an async function called startBrowser(). This function will start the browser and return an instance of it. Add the following code:
@@ -180,7 +180,7 @@ Save and close the file.
 
 Now create your second .js file, index.js:
 
-```bash
+```java
 nano index.js
  
 # Here you will require browser.js and pageController.js. You will then call the startBrowser() function and pass the created browser instance to our page controller, which will direct its actions. Add the following code:
@@ -200,7 +200,7 @@ scraperController(browserInstance)
 
 ### Create your third .js file, pageController.js:
 
-```bash
+```java
 nano pageController.js
  
 # pageController.js controls your scraping process. 
@@ -232,7 +232,7 @@ Save and close the file.
 
 ### Finally, create your last .js file, pageScraper.js:
 
-```bash
+```java
 nano pageScraper.js
  
 # Here you will create an object literal with a url property and a scraper() method. 
@@ -275,7 +275,7 @@ Output
 └── pageScraper.js  
 Now run the command npm run start and watch your scraper application execute:
 
-```bash
+```java
 npm run start
 ```
  
@@ -300,7 +300,7 @@ You’ll be scraping these book URLs, filtering for books that are in-stock, nav
 
 Reopen your pageScraper.js file:
 
-```bash
+```java
 nano pageScraper.js
  
 # Add the following highlighted content. You will nest another await block inside await page.goto(this.url);:
@@ -338,7 +338,7 @@ Save and close the file.
 
 Re-run your application:
 
-```bash
+```java
 npm run start
  
 # The browser will open, navigate to the web page, and then close once the task completes. 
@@ -378,7 +378,7 @@ This is a great start, but you want to scrape all the relevant data for a partic
 
 Reopen pageScraper.js:
 
-```bash
+```java
 nano pageScraper.js
  
 # Add the following code, which will loop through each scraped link, 
@@ -448,7 +448,7 @@ Save and close the file.
 
 Run the script again:
 
-```bash
+```java
 npm run start
  
 # The browser opens the homepage and then opens each book page and logs the scraped data from each of those pages. This output will print to your console:
@@ -494,7 +494,7 @@ First, you need to change the structure of your code a bit to accommodate recurs
 
 Reopen pagescraper.js:
 
-```bash
+```java
 nano pagescraper.js
  
 # You will add a new function called scrapeCurrentPage() to your scraper() method. 
@@ -586,7 +586,7 @@ module.exports = scraperObject;
 
 Run your script again:
 
-```bash
+```java
 npm run start
 ```
  
@@ -599,7 +599,7 @@ To scrape data by category, you will need to modify both your pageScraper.js fil
 
 Open pageController.js in a text editor:
 
-```bash
+```java
 # Call the scraper so that it only scrapes travel books. Add the following code:
 
 # ./book-scraper/pageController.js
@@ -630,7 +630,7 @@ Save and close the file.
 
 Open pageScraper.js:
 
-```bash
+```java
 nano pageScraper.js
  
 # Add the following code, which will add your category parameter, 
@@ -737,7 +737,7 @@ This URL is then used to navigate to the page that displays the category of book
 Save and close the file.
 
 Run your application again. You will notice that it navigates to the Travel category, recursively opens books in that category page by page, and logs the results:
-```bash
+```java
 npm run start
 ```
  
@@ -750,7 +750,7 @@ You can quickly add more categories to scrape; doing so requires only one additi
 
 Open pageController.js:
 
-```bash
+```java
 nano pageController.js
  
 Adjust your code to include additional categories. The example below adds HistoricalFiction and Mystery to our existing Travel category:
@@ -787,7 +787,7 @@ With the scraper fully-functional, your final step involves saving your data in 
 
 First, reopen pageController.js:
 
-```bash
+```java
 nano pageController.js
  
 Add the following highlighted code:
