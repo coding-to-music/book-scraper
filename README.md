@@ -785,18 +785,21 @@ module.exports = (browserInstance) => scrapeAll(browserInstance)
 
 Run the script again and watch it scrape data for all three categories:
 
+```java
 npm run start
- 
+```
+
 With the scraper fully-functional, your final step involves saving your data in a more useful format. You will now store it in a JSON file using the fs module in Node.js.
 
 First, reopen pageController.js:
 
 ```java
-nano pageController.js
+// nano pageController.js
  
-Add the following highlighted code:
+// Add the following highlighted code:
 
-./book-scraper/pageController.js
+// ./book-scraper/pageController.js
+
 const pageScraper = require('./pageScraper');
 const fs = require('fs');
 async function scrapeAll(browserInstance){
