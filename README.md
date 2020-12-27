@@ -717,26 +717,30 @@ const scraperObject = {
 }
 
 module.exports = scraperObject;
- 
-# This code block uses the category that you passed in to get the URL where the books of that category reside.
+```
 
-# The page.$$eval() can take in arguments by passing the argument as a third parameter to the $$eval() method, 
-# and defining it as the third parameter in the callback as such:
+This code block uses the category that you passed in to get the URL where the books of that category reside.
 
+The page.$$eval() can take in arguments by passing the argument as a third parameter to the $$eval() method, 
+and defining it as the third parameter in the callback as such:
+
+```java
 example page.$$eval() function
 page.$$eval('selector', function(elem, args){
     // .......
 }, args)
- 
+
 # This was what you did in your code; you passed the category of books you wanted to scrape, 
 # mapped through all the categories to check which one matches, and then returned the URL of this category.
+```
+
 
 This URL is then used to navigate to the page that displays the category of books you want to scrape using the page.goto(selectedCategory) method.
-```
 
 Save and close the file.
 
 Run your application again. You will notice that it navigates to the Travel category, recursively opens books in that category page by page, and logs the results:
+
 ```java
 npm run start
 ```
